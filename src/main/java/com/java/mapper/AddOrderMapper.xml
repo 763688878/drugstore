@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.AddOrderMapper">
+    <!--    //增加订单
+    public int insertOrder(Ordertable ordertable);-->
+   <insert id="insertOrder">
+       insert into Ordertable (
+  `orderserial`,
+  `customerId`,
+  `name`,
+  `telphone`,
+  `address`,
+  `price`,
+  `state`,
+  `time`,
+  `customerdelete`)
+  values (
+  #{orderserial},
+  #{customerId},
+  #{name},
+  #{telphone},
+  #{address},
+  #{price},
+  1,
+  #{time},
+  1
+  )
+   </insert>
+</mapper>

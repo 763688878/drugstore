@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.ShoppingMapper">
+    <!--增-->
+    <insert id="add">
+        insert into Shopping(`name`,`count`,`price`,`photo`,customer_serial) values(#{name},#{count},#{price},#{photo},#{customerSerial})
+    </insert>
+    <!--删-->
+    <delete id="delete">
+        delete from Shopping where id = #{id}
+    </delete>
+    <!--批量删-->
+    <update id="batchDelete">
+        delete from Shopping where id in
+        <foreach collection="array" item="id" open="(" close=")"
+                 separator=",">
+            #{id}
+        </foreach>
+    </update>
+    <!--改-->
+    <update id="update">
+        update Shopping set `name` = #{name},`count` = #{count},`price`= #{price},`photo`= #{photo} where id = #{id}
+    </update>
+    <!--查所有-->
+    <select id="findAll" resultType="com.java.pojo.Shopping">
+        select * from Shopping
+    </select>
+
+    <!--查自己的购物车-->
+    <select id="findOneSelf" resultType="com.java.pojo.Shopping">
+        select * from Shopping where customer_serial = #{customerSerial}
+    </select>
+
+    <!--查单条-->
+    <select id="findOne" resultType="com.java.pojo.Shopping">
+        select * from Shopping where id = #{id}
+    </select>
+
+    <!--    //批量修改状态
+    public int updateManyStatus(@Param("status")String status, @Param("list")List<Integer> list);-->
+    <update id="updateManyStatus">
+        update shopping set status = #{status} where id in
+        <foreach collection="list" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <!--    //重置状态为0
+    public int updateZero(String serial);-->
+    <update id="updateZero">
+        update shopping set status = 0 where customer_serial = #{serial}
+    </update>
+
+    <!--    //计算指定用户购物总金额
+    public int totalMoney(String customerSerial);-->
+    <select id="totalMoney" resultType="java.lang.String">
+        select sum(`count`*`price`) from shopping where customer_serial = #{customerSerial} and status = 1;
+    </select>
+</mapper>

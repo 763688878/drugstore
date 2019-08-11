@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.DoctorMapper">
+    <!--增-->
+    <insert id="add">
+        insert into
+        Doctor(tel,`name`,serial,certificate,post,subject,hospital,employage,medicalexpen,status,idcard,photo,online)
+        values(#{tel},#{name},#{serial},#{certificate},#{post},#{subject},#{hospital},#{employage},#{medicalexpen},#{status},#{idcard},#{photo},#{online})
+    </insert>
+    <!--删-->
+    <delete id="delete">
+        delete from Doctor where id = #{id}
+    </delete>
+    <!--改-->
+    <update id="update">
+      UPDATE Doctor
+SET
+  `tel` = #{tel},
+  `name` = #{name},
+  `serial` =#{serial},
+  `certificate` = #{certificate},
+  `post` =#{post},
+  `subject` = #{subject},
+  `hospital` = #{hospital},
+  `employage` = #{employage},
+  `medicalexpen` = #{medicalexpen},
+  `status` = #{status},
+  `idcard` = #{idcard},
+  `photo` =#{photo},
+  `online` = #{online}
+WHERE `id` =#{id}
+    </update>
+    <!--查所有-->
+    <select id="findAll" resultType="com.java.pojo.Doctor">
+        select * from Doctor
+    </select>
+    <!--查所有在线医生-->
+    <select id="findAllOnline" resultType="com.java.pojo.Doctor">
+        select * from Doctor where online = '是' and status = '已审核'
+    </select>
+    <!--查单条-->
+    <select id="findOne" resultType="com.java.pojo.Doctor">
+        select * from Doctor where id = #{id}
+    </select>
+    <!--登录-->
+    <select id="login" resultType="com.java.pojo.Doctor">
+        select * from Doctor where tel = #{tel} and password = #{password}
+    </select>
+    <select id="findOneByTel" resultType="com.java.pojo.Doctor">
+        select * from Doctor where tel = #{tel}
+    </select>
+    <!--多条件查询-->
+    <select id="searchOne"  resultType="com.java.pojo.Doctor">
+        select * from doctor
+        <where>
+            <if test="post != null and post != ''">
+                post = #{post}
+            </if>
+            <if test="subject != null  and subject != ''">
+                and subject = #{subject}
+            </if>
+            <if test="hospital !=null  and hospital != ''">
+                and hospital = #{hospital}
+            </if>
+            <if test="serial !=null  and serial != ''">
+                and serial = #{serial}
+            </if>
+
+        </where>
+    </select>
+
+    <!--医生精确查找-->
+    <select id="find" resultType="com.java.pojo.Doctor">
+        select * from Doctor where serial = #{serial}
+    </select>
+
+    <!--批量删-->
+    <update id="batchDelete">
+        delete from Doctor where id in
+        <foreach collection="array" item="id" open="(" close=")"
+                 separator=",">
+            #{id}
+        </foreach>
+    </update>
+
+    <!--分页-->
+    <select id="findOneSelf" resultType="com.java.pojo.Doctor">
+        select * from Doctor where serial = #{serial}
+    </select>
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.CarouselMapper">
+    <!--增-->
+    <insert id="add">
+        insert into Carousel(`name`) values(#{name})
+    </insert>
+    <!--删-->
+    <delete id="delete">
+        delete from Carousel where id = #{id}
+    </delete>
+    <!--批量删-->
+    <update id="batchDelete">
+        delete from Carousel where id in
+        <foreach collection="array" item="id" open="(" close=")"
+                 separator=",">
+            #{id}
+        </foreach>
+    </update>
+    <!--改-->
+    <update id="update">
+        update Carousel set `name`=#{name} where id = #{id}
+    </update>
+    <!--查所有-->
+    <select id="findAll" resultType="com.java.pojo.Carousel">
+        select * from Carousel
+    </select>
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.DrugstoreMapper">
+    <!--增-->
+    <insert id="add">
+        insert into Drugstore(tel,serial,`name`,site) values(#{tel},#{serial},#{name},#{site})
+    </insert>
+    <!--删-->
+    <delete id="delete">
+        delete from Drugstore where id = #{id}
+    </delete>
+    <!--改-->
+    <update id="update">
+       UPDATE  Drugstore
+SET
+  `tel` =#{tel},
+  `serial` =#{serial},
+  `name` =#{name},
+  `site` = #{site}
+WHERE `id` = #{id}
+
+
+    </update>
+    <!--查所有-->
+    <select id="findAll" resultType="com.java.pojo.Drugstore">
+        select * from Drugstore
+    </select>
+    <!--查单条-->
+    <select id="findOne" resultType="com.java.pojo.Drugstore">
+        select * from Drugstore where id = #{id}
+    </select>
+    <!--登录-->
+    <select id="login" resultType="com.java.pojo.Drugstore">
+        select * from Drugstore where tel = #{tel} and password = #{password}
+    </select>
+    <!--根据tel查询-->
+    <select id="findOneByTel" resultType="com.java.pojo.Drugstore">
+        select * from Drugstore where tel=#{tel}
+    </select>
+
+    <!--药店多条件查询-->
+    <select id="searchOne"  resultType="com.java.pojo.Drugstore">
+        select * from Drugstore
+        <where>
+            <if test="name != null  and name != ''">
+                and name = #{name}
+            </if>
+            <if test="site  !=null  and site  != ''">
+                and site  = #{site }
+            </if>
+            <if test="serial !=null  and serial != ''">
+                and serial = #{serial}
+            </if>
+
+        </where>
+    </select>
+
+    <!--药店精确查找-->
+    <select id="find" resultType="com.java.pojo.Drugstore">
+        select * from Drugstore where serial = #{serial}
+    </select>
+
+    <!--药店批量删-->
+    <update id="batchDelete">
+        delete from Drugstore where id in
+        <foreach collection="array" item="id" open="(" close=")"
+                 separator=",">
+            #{id}
+        </foreach>
+    </update>
+
+    <!--药店分页-->
+    <select id="findOneSelf" resultType="com.java.pojo.Drugstore">
+        select * from Drugstore where serial = #{serial}
+    </select>
+</mapper>

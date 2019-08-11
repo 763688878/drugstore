@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.AdminMapper">
+    <!--增-->
+    <insert id="add">
+        insert into Admin(tel,`name`) values(#{tel},#{name})
+    </insert>
+    <!--删-->
+    <delete id="delete">
+        delete from Admin where id = #{id}
+    </delete>
+    <!--改-->
+    <update id="update">
+        update Admin set tel = #{tel},`name`=#{name} where id = #{id}
+    </update>
+    <!--查所有-->
+    <select id="findAll" resultType="com.java.pojo.Admin">
+        select * from Admin
+    </select>
+    <!--查单条-->
+    <select id="findOne" resultType="com.java.pojo.Admin">
+        select * from Admin where id = #{id}
+    </select>
+
+    <!--登录-->
+    <select id="login" resultType="com.java.pojo.Admin">
+        select * from Admin where tel = #{tel} and password = #{password}
+    </select>
+
+    <!--根据tel查-->
+    <select id="findOneByTel" resultType="com.java.pojo.Admin">
+        select * from Admin where tel = #{tel}
+    </select>
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.mapper.CustomerMapper">
+    <!--增-->
+    <insert id="add">
+        insert into Customer(tel,password,serial,`name`,age,sex,site,medicalrecord)
+        values(#{tel},#{password},#{serial},#{name},#{age},#{sex},#{site},#{medicalrecord})
+    </insert>
+    <!--删-->
+    <delete id="delete">
+        delete from Customer where id = #{id}
+    </delete>
+    <!--改-->
+    <update id="update">
+      UPDATE Customer
+   SET
+  `id` = #{id},
+  `tel` = #{tel},
+  `password` = #{password},
+  `serial` = #{serial},
+  `name` =#{name},
+  `age` = #{age},
+  `sex` = #{sex},
+  `site` =#{site},
+  `medicalrecord` =#{medicalrecord}
+WHERE `id` = #{id}
+    </update>
+    <!--查所有-->
+    <select id="findAll" resultType="com.java.pojo.Customer">
+        select * from Customer
+    </select>
+    <!--查单条-->
+    <select id="findOne" resultType="com.java.pojo.Customer">
+        select * from Customer where id = #{id}
+    </select>
+    <!--//查单条
+    Customer findOneBySerial(String serial);-->
+    <select id="findOneBySerial" resultType="com.java.pojo.Customer">
+        select * from Customer where serial = #{serial}
+    </select>
+    <!--登录-->
+    <select id="login" resultType="com.java.pojo.Customer">
+        select * from Customer where tel = #{tel} and password = #{password}
+    </select>
+
+    <select id="checkingCount" resultType="Integer">
+        SELECT COUNT(*) FROM customer WHERE tel = #{tel}
+    </select>
+
+    <select id="findOneByTel" resultType="com.java.pojo.Customer">
+        select * from customer where tel = #{tel}
+    </select>
+
+    <!--顾客多条件查询-->
+    <select id="searchOne"  resultType="com.java.pojo.Customer">
+        select * from Customer
+        <where>
+            <if test="site != null  and site != ''">
+                and site = #{site}
+            </if>
+            <if test="medicalrecord !=null  and medicalrecord != ''">
+                and medicalrecord = #{medicalrecord}
+            </if>
+            <if test="serial !=null  and serial != ''">
+                and serial = #{serial}
+            </if>
+
+        </where>
+    </select>
+
+    <!--顾客精确查找-->
+    <select id="find" resultType="com.java.pojo.Customer">
+        select * from Customer where serial = #{serial}
+    </select>
+
+    <!--顾客批量删-->
+    <update id="batchDelete">
+        delete from Customer where id in
+        <foreach collection="array" item="id" open="(" close=")"
+                 separator=",">
+            #{id}
+        </foreach>
+    </update>
+
+    <!--顾客分页-->
+    <select id="findOneSelf" resultType="com.java.pojo.Customer">
+        select * from Customer where serial = #{serial}
+    </select>
+</mapper>

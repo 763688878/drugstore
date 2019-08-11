@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.mapper.OrdertableMapper">
+<!--查所有-->
+    <select id="zz_findOrder" resultType="com.java.pojo.Ordertable" >
+        select * from ordertable
+    </select>
+
+<!--按编号查询-->
+    <select id="findOneOrder" resultType="com.java.pojo.Ordertable">
+        select * from ordertable where orderserial = #{orderserial}
+    </select>
+    <!--修改单条-->
+    <update id="updateOrder">
+        update ordertable set ordertable.name = #{name},telphone = #{telphone},address = #{address} where id = #{id}
+    </update>
+    <!--<select id="zz_findOrderBy" resultType="com.java.pojo.Ordertable" >-->
+        <!--select * from ordertable-->
+        <!--<where>-->
+            <!--<if test="name != null and name !='' ">-->
+                <!--and name = #{name}-->
+            <!--</if>-->
+
+            <!--<if test="orderserial != null and orderserial != ''" >-->
+                <!--and orderserial = #{orderserial}-->
+            <!--</if>-->
+
+            <!--<if test="telphone != null and telphone != ''">-->
+                <!--and telphone = #{telphone}-->
+
+            <!--</if>-->
+
+            <!--<if test="address != null and address != ''">-->
+                <!--and address like "%"#{address}"%"-->
+
+            <!--</if>-->
+
+            <!--<if test="customerdelete != null and customerdelete != ''">-->
+                <!--and customerdelete = #{customerdelete}-->
+            <!--</if>-->
+
+        <!--</where>-->
+    <!--</select>-->
+<!--删除单条-->
+    <delete id="delOneOrder">
+        delete from ordertable where id = #{id}
+    </delete>
+<!--删除多条-->
+    <delete id="delSomeOrder">
+        delete from ordertable where id in
+        <foreach collection="array"  separator="," open="(" close=")" item="ids">
+           #{ids}
+        </foreach>
+
+    </delete>
+
+    <select id="findOrderById" resultType="com.java.pojo.Ordertable">
+        select * from ordertable where customerId=#{customerId} and customerdelete = 1
+    </select>
+
+    <update id="deleteOrder">
+        update ordertable set customerdelete = 0 where id = #{id}
+    </update>
+
+
+    <update id="deleteSomeOrders">
+        update ordertable set customerdelete = 0 where id in
+        <foreach collection="array" item="ids" open="(" close=")" separator=",">
+            #{ids}
+        </foreach>
+    </update>
+</mapper>

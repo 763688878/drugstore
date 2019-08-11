@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.mapper.InterrogationMapper">
+    <!--查询片段-->
+    <sql id="int">
+        itrgt_id, itrgt_teacher_id, itrgt_user_id, itrgt_start_time, itrgt_end_time, itrgt_total_price
+    </sql>
+
+    <!--    //查所有问诊记录
+    public List<Interrogation> findAllInterrogation();-->
+    <select id="findAllInterrogation" resultType="interrogation">
+        select
+        <include refid="int"/>
+        from interrogation
+    </select>
+
+    <!--//根据id查询指定问诊记录
+    public Interrogation findInterrogationById(Integer id);-->
+    <select id="findInterrogationById" resultType="interrogation">
+        select
+        <include refid="int"/>
+        from interrogation
+        where itrgt_id = #{itrgtId}
+    </select>
+
+    <!--    //查询多个问诊记录
+    public List<Interrogation> findInterrogationByIds(List<Integer> list);-->
+    <select id="findInterrogationByIds" resultType="interrogation">
+        select
+        <include refid="int"/>
+        from interrogation where itrgt_id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <!--//查询不同状态的问诊记录
+    public List<Interrogation> findInterrogationByAnyStatus(Interrogation interrogation);-->
+    <select id="findInterrogationByAnyStatus" resultType="interrogation">
+        select
+        <include refid="int"/>
+        from interrogation
+        <where>
+            <if test="#{itrgtId} != null">
+                and itrgt_id = #{itrgtId}
+            </if>
+            <if test="#{itrgtTeacherId} != null">
+                and itrgt_teacher_id = #{itrgtTeacherId}
+            </if>
+            <if test="#{itrgtUserId} != null">
+                and itrgt_user_id = #{itrgtUserId}
+            </if>
+            <if test="#{itrgtStartTime} != null">
+                and itrgt_start_time = #{itrgtStartTime}
+            </if>
+            <if test="#{itrgtEndTime} != null">
+                and itrgt_end_time = #{itrgtEndTime}
+            </if>
+            <if test="#{itrgtTotalPrice} != null">
+                and itrgt_total_price = #{itrgtTotalPrice}
+            </if>
+        </where>
+    </select>
+
+
+    <!--    //删除单个问诊记录
+    public int deleteInterrogationById(Integer id);-->
+    <delete id="deleteInterrogationById">
+        delete from interrogation where itrgt_id = #{itrgtId}
+    </delete>
+
+    <!--//删除多个问诊记录
+    public int deleteInterrogationByIds(List<Integer> list);-->
+    <delete id="deleteInterrogationByIds">
+        delete from interrogation
+        where itrgt_id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <sql id="ins">
+        itrgt_teacher_id, itrgt_user_id, itrgt_start_time, itrgt_end_time, itrgt_total_price
+    </sql>
+
+    <!-- //增加问诊记录
+    public int insertInterrogation(Interrogation interrogation);-->
+    <insert id="insertInterrogation">
+        insert into interrogation (<include refid="ins"/>) values (#{itrgtTeacherId},#{itrgtUserId},#{itrgtStartTime},#{itrgtEndTime},#{itrgtTotalPrice});
+    </insert>
+
+    <!--//批量增加问诊记录
+    public int insertManyInterrogation(List<Interrogation> list);-->
+    <insert id="insertManyInterrogation">
+        insert into interrogation (<include refid="ins"/>) values
+        <foreach collection="list" item="l" separator=",">
+            (#{l.itrgtTeacherId},#{l.itrgtUserId},#{l.itrgtStartTime},#{l.itrgtEndTime},#{l.itrgtTotalPrice})
+        </foreach>
+    </insert>
+
+    <!--//修改单条问诊记录
+    public int updateInterrogationById(Interrogation interrogation);-->
+    <update id="updateInterrogationById">
+        update interrogation
+        <set>
+            <if test="#{itrgtTeacherId} != null">
+                itrgt_teacher_id = #{itrgtTeacherId},
+            </if>
+            <if test="#{itrgtUserId} != null">
+                itrgt_user_id = #{itrgtUserId},
+            </if>
+            <if test="#{itrgtStartTime} != null">
+                itrgt_start_time = #{itrgtStartTime},
+            </if>
+            <if test="#{itrgtEndTime} != null">
+                itrgt_end_time = #{itrgtEndTime},
+            </if>
+            <if test="#{itrgtTotalPrice} != null">
+                itrgt_total_price = #{itrgtTotalPrice},
+            </if>
+        </set>
+        where itrgt_id = #{itrgtId}
+    </update>
+
+    <!--//修改多条问诊记录
+    public int updateManyInterrogation(List<Interrogation> list);-->
+    <update id="updateManyInterrogation">
+        <foreach collection="list" separator=";" item="l" >
+            update Interrogation
+            <set>
+                <if test="#{l.itrgtTeacherId} != null">
+                    itrgt_teacher_id = #{l.itrgtTeacherId},
+                </if>
+                <if test="#{l.itrgtUserId} != null">
+                    itrgt_user_id = #{l.itrgtUserId},
+                </if>
+                <if test="#{l.itrgtStartTime} != null">
+                    itrgt_start_time = #{l.itrgtStartTime},
+                </if>
+                <if test="#{l.itrgtEndTime} != null">
+                    itrgt_end_time = #{l.itrgtEndTime},
+                </if>
+                <if test="#{l.itrgtTotalPrice} != null">
+                    itrgt_total_price = #{l.itrgtTotalPrice},
+                </if>
+            </set>
+            where itrgt_id = #{l.itrgtId}
+        </foreach>
+    </update>
+</mapper>

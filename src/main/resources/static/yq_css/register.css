@@ -1,0 +1,257 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+#main{
+	width: 100%;
+}
+
+#main .iam-main-inner{
+	width: 600px;
+	height: 849px;
+	margin: 0 auto;
+	position: relative;
+	padding: 60px;
+}
+
+#iam-goback{
+	position: absolute;
+	left: 550px;
+	top: 28px;
+}
+
+.iam-main-inner .account-details{
+	width: 480px;
+	height: 909px;
+	position: relative;
+	left: 50px;
+}
+
+/*账号*/
+#firstname{
+	width: 480px;
+	height: 29px;
+	padding: 10px;
+	border: none;
+	border-bottom: 1px solid #b7c5d1;
+	font-size: 26px;
+	color: black;
+	background-color:transparent;
+}
+
+#userId{
+	position: absolute;
+	top: -130px;
+}
+
+/*密码*/
+#passWord{
+	width: 480px;
+	height: 29px;
+	padding: 10px;
+	border: none;
+	border-bottom: 1px solid #b7c5d1;
+	font-size: 26px;
+	color: black;
+	background-color:transparent;
+}
+
+#passWord0{
+	position: absolute;
+	top: -50px;
+}
+
+
+/*姓名*/
+#name{
+	width: 480px;
+	height: 29px;
+	padding: 10px;
+	border: none;
+	border-bottom: 1px solid #b7c5d1;
+	font-size: 26px;
+	color: black;
+	background-color:transparent;
+}
+
+#name0{
+	position: absolute;
+	top: 30px;
+}
+
+/*年龄*/
+#age{
+	width: 480px;
+	height: 29px;
+	padding: 10px;
+	border: none;
+	border-bottom: 1px solid #b7c5d1;
+	font-size: 26px;
+	color: black;
+	background-color:transparent;
+}
+
+#age0{
+	position: absolute;
+	top: 110px;
+}
+
+/*性别*/
+#sex0{
+	position: absolute;
+	top: 190px;
+}
+
+#sex{
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 1px solid #b7c5d1;
+	width: 100px;
+	text-align: center;
+	line-height:50px;
+	font-size: 1em;
+	height: 30px;
+	position: absolute;
+	top: 15px;
+	left: 60px;
+}
+
+/*地址*/
+#site{
+	width: 480px;
+	height: 29px;
+	padding: 10px;
+	border: none;
+	border-bottom: 1px solid #b7c5d1;
+	font-size: 26px;
+	color: black;
+	background-color:transparent;
+}
+
+#site0{
+	position: absolute;
+	top: 250px;
+}
+
+/*验证码*/
+#verifyCode{
+	width: 280px;
+	height: 29px;
+	padding: 10px;
+	border: none;
+	border-bottom: 1px solid #b7c5d1;
+	font-size: 26px;
+	color: black;
+	background-color:transparent;
+}
+
+#verifyCode0{
+	position: absolute;
+	top: 330px;
+}
+
+.custom-input{
+	position: relative;
+}
+
+.account-details .custom-input label{
+	font-size: 1.242em;
+	color: black;
+	position: absolute;
+	left: 10px;
+}
+
+#main .wrong-prompt{
+	width: 480px;
+	text-align: center;
+	font-size: 16px;
+	color: red;
+	position: absolute;
+	top: 860px;
+	display: none;
+}
+
+#main .account-details .register-button-box{
+	position: absolute;
+	width: 270px;
+	height: 50px;
+	top: 700px;
+}
+
+#main .account-details .verifyCode-button-box{
+	position: absolute;
+	left: 310px;
+	top: 550px;
+	width: 180px;
+	height: 50px;
+}
+
+#register-button{
+	width: 270px;
+	height: 50px;
+	margin-left: 105px;
+	border: 2px solid black;
+	font-size: 1em;
+	font-weight: bold;
+	background-color:transparent;
+	border-radius: 0.5em;
+}
+
+#getVerifyCode-button{
+	width: 180px;
+	height: 50px;
+	border: 2px solid black;
+	font-size: 1em;
+	font-weight: bold;
+	background-color:transparent;
+	border-radius: 0.5em;
+}
+
+
+#login-button:hover{
+	border-color: #1428A0;
+	color: #1428A0;
+}
+
+#register-button:hover{
+	border-color: #1428A0;
+	color: #1428A0;
+}
+
+.signin-link{
+	position: absolute;
+	top: 880px;
+	left: 165px;
+}
+
+.signin-link a{
+	color: #1428A0;
+	text-decoration: underline;
+}
+
+#customer-selection{
+	width: 33.33%;
+	height: 49px;
+	float: left;
+	line-height: 50px;
+	text-align: center;
+	border-bottom: 1px solid #d4d4d4;
+}
+
+#doctor-selection{
+	width: 33.33%;
+	height: 49px;
+	float: left;
+	line-height: 50px;
+	text-align: center;
+}
+
+#drugstore-selection{
+	width: 33.33%;
+	height: 49px;
+	float: left;
+	line-height: 50px;
+	text-align: center;
+}
