@@ -120,7 +120,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>LATEST</version>
+            <version>1.2.83</version>
         </dependency>
 
         <!--消息提示插件-->
@@ -139,7 +139,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.47</version>
+            <version>1.2.83</version>
         </dependency>
 
         <!--榛子云短信验证码-->
